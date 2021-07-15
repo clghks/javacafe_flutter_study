@@ -1,6 +1,7 @@
 import 'package:cracker_book/component/StudyInfoComponent.dart';
 import 'package:cracker_book/model/MainContent.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class BookMainComponent extends StatelessWidget {
   MainContent item;
@@ -25,8 +26,8 @@ class BookMainComponent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text("스터디", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
-              Text("전체보기 >"),
+              Text('스터디', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
+              Text('전체보기 >'),
             ],
           ),
           SizedBox(height: 10),
@@ -34,12 +35,30 @@ class BookMainComponent extends StatelessWidget {
             decoration: getBoxDecoration(),
             width: MediaQuery.of(context).size.width,
             height: 300,
-            child: Image.network(item.image),
+            child: Stack(
+              children: [
+                Center(child: item.image.endsWith('svg') ? SvgPicture.network(item.image) : Image.network(item.image)),
+                Positioned(
+                  right: 20,
+                  top: 20,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SvgPicture.network('https://www.crackerbook.club/assets/main/bookLike.svg'),
+                      Text('14')
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
-          SizedBox(height: 10),
-          StudyInfoComponent(item.studyInfo[0]),
           SizedBox(height: 5),
-          StudyInfoComponent(item.studyInfo[1])
+          ...item.studyInfo.map((e) {
+            return Column(children: [
+              SizedBox(height: 10),
+              StudyInfoComponent(e)]
+            );
+          })
         ],
       ),
     );

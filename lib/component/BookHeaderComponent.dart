@@ -14,7 +14,7 @@ class BookHeaderComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 130,
       padding: EdgeInsets.all(10),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
@@ -23,7 +23,7 @@ class BookHeaderComponent extends StatelessWidget {
           return BookHeader(items[index]);
         },
         separatorBuilder: (context, index) {
-          return SizedBox(width: 20);
+          return SizedBox(width: 10);
         },
       ),
     );
@@ -54,12 +54,13 @@ class BookHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 5),
         Container(
           padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(10),
           decoration: getBoxDecoration(),
           child: SvgPicture.network(item.icon),
         ),
-        SizedBox(height: 4),
         Center(
           child: Text(item.name),
         )
