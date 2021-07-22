@@ -1,4 +1,5 @@
 import 'package:cracker_book/model/Book.dart';
+import 'package:cracker_book/page/CategoryPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -20,7 +21,15 @@ class BookHeaderComponent extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: items.length,
         itemBuilder: (BuildContext context, int index) {
-          return BookHeader(items[index]);
+          return GestureDetector(
+            child: BookHeader(items[index]),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CategoryPage()),
+              );
+            },
+          );
         },
         separatorBuilder: (context, index) {
           return SizedBox(width: 10);

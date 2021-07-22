@@ -1,9 +1,13 @@
-import 'package:cracker_book/model/StudyInfo.dart';
+import 'package:cracker_book/model/LikeStudyInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class LikeStudyComponent extends StatelessWidget {
-  List<String> items = ["1", "2", "3", "4", "5"];
+  var items = [
+    LikeStudyInfo('https://www.crackerbook.club/assets/main/categoryBook2.svg', '한달 한권', '3/6', '04.26~05.26 토 14:00'),
+    LikeStudyInfo('https://www.crackerbook.club/assets/main/categoryBook2.svg', '한달 한권', '3/6', '04.26~05.26 토 14:00'),
+    LikeStudyInfo('https://www.crackerbook.club/assets/main/categoryBook2.svg', '한달 한권', '3/6', '04.26~05.26 토 14:00')
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +22,7 @@ class LikeStudyComponent extends StatelessWidget {
             child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (BuildContext context, int index) {
-                  return LikeStudyItem();
+                  return LikeStudyItem(index, items[index]);
                 },
                 separatorBuilder: (context, index) {
                   return SizedBox(width: 20);
@@ -45,6 +49,11 @@ class LikeStudyHeader extends StatelessWidget {
 }
 
 class LikeStudyItem extends StatelessWidget {
+  int index;
+  LikeStudyInfo item;
+
+  LikeStudyItem(this.index, this.item);
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -53,8 +62,8 @@ class LikeStudyItem extends StatelessWidget {
         children: [
           Stack(
             children: [
-              SvgPicture.network('https://www.crackerbook.club/assets/main/categoryBook2.svg'),
-              SvgPicture.network('https://www.crackerbook.club/assets/main/like1.svg')
+              SvgPicture.network(item.image),
+              SvgPicture.network('https://www.crackerbook.club/assets/main/like${index + 1}.svg')
             ],
           ),
           Row(
@@ -65,13 +74,13 @@ class LikeStudyItem extends StatelessWidget {
               SizedBox(width: 4),
               SvgPicture.network('https://www.crackerbook.club/assets/main/member.svg'),
               SizedBox(width: 2),
-              Text('멤버 3/6', style: TextStyle(color: Color(0xFF677ac7)))
+              Text('멤버 ${item.member}', style: TextStyle(color: Color(0xFF677ac7)))
             ],
           ),
           SizedBox(height: 3),
-          Text('한달 한권', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
+          Text(item.title, style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold)),
           SizedBox(height: 3),
-          Text('04.26~05.26 토 14:00', style: TextStyle(fontSize: 12, color: Color(0xFF999999)))
+          Text(item.date, style: TextStyle(fontSize: 12, color: Color(0xFF999999)))
         ],
       ),
     );
