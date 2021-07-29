@@ -4,7 +4,16 @@ import 'package:cracker_book/model/LikeStudyInfo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class CategoryPage extends StatelessWidget {
+class CategoryPage extends StatefulWidget {
+  var pageIndex = 0;
+
+  CategoryPage(this.pageIndex);
+
+  @override
+  _CategoryPageState createState() => _CategoryPageState();
+}
+
+class _CategoryPageState extends State<CategoryPage> {
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +29,7 @@ class CategoryPage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              BookHeaderComponent(),
+              BookHeaderComponent(false, clickIndex: widget.pageIndex, clickEvent: clickEvent),
               GridView.count(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -30,12 +39,12 @@ class CategoryPage extends StatelessWidget {
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 children: [
-                  CategoryItem(0, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권', '3/6', '04.26~05.26 토 14:00')),
-                  CategoryItem(1, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권', '3/6', '04.26~05.26 토 14:00')),
-                  CategoryItem(2, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권', '3/6', '04.26~05.26 토 14:00')),
-                  CategoryItem(0, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권', '3/6', '04.26~05.26 토 14:00')),
-                  CategoryItem(1, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권', '3/6', '04.26~05.26 토 14:00')),
-                  CategoryItem(2, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권', '3/6', '04.26~05.26 토 14:00')),
+                  CategoryItem(0, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
+                  CategoryItem(1, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
+                  CategoryItem(2, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
+                  CategoryItem(0, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
+                  CategoryItem(1, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
+                  CategoryItem(2, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
                 ],
               )
             ],
@@ -43,6 +52,12 @@ class CategoryPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void clickEvent(int index) {
+    setState(() {
+      widget.pageIndex = index;
+    });
   }
 }
 

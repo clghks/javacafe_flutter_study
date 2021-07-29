@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'component/AppBarComponent.dart';
+import 'component/BottomNavigationBarComponent.dart';
 import 'home.dart';
 
 void main() {
@@ -15,10 +16,12 @@ class MyApp extends StatelessWidget {
       title: 'Cracker Book',
       theme: ThemeData(
         primaryColor: Colors.white,
+        canvasColor: Colors.transparent,
       ),
       home: Scaffold(
         appBar: getAppBar(),
         body: Home(),
+        bottomNavigationBar: BottomNavigationBarComponent(),
       ),
     );
   }

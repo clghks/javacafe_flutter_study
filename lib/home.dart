@@ -29,20 +29,9 @@ class Home extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            BookHeaderComponent(),
+            BookHeaderComponent(true),
             ...items.map((e) => BookMainComponent(e)).toList(),
             LikeStudyComponent()
-            // SizedBox(
-            //     height: 700,
-            //     child: ListView.separated(
-            //       itemCount: items.length,
-            //       itemBuilder: (BuildContext context, int index) {
-            //         return BookMainComponent(items[index]);
-            //       },
-            //       separatorBuilder: (context, index) {
-            //         return SizedBox(width: 20);
-            //       },
-            //     )),
           ],
         ),
       ),

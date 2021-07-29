@@ -3,7 +3,11 @@ import 'package:cracker_book/page/CategoryPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class BookHeaderComponent extends StatelessWidget {
+class BookHeaderComponent extends StatefulWidget {
+  var isRootPage = false;
+  var clickIndex = -1;
+  var clickEvent;
+
   var items = [
     Book("토론", "https://www.crackerbook.club/assets/main/chats.svg"),
     Book("발표", "https://www.crackerbook.club/assets/main/microphone.svg"),
@@ -12,6 +16,21 @@ class BookHeaderComponent extends StatelessWidget {
     Book("기타", "https://www.crackerbook.club/assets/main/etc.svg")
   ];
 
+  BookHeaderComponent(this.isRootPage, {this.clickIndex, this.clickEvent});
+
+  @override
+  _BookHeaderComponentState createState() => _BookHeaderComponentState();
+}
+
+class _BookHeaderComponentState extends State<BookHeaderComponent> {
+  int clickIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    clickIndex = widget.clickIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -19,15 +38,12 @@ class BookHeaderComponent extends StatelessWidget {
       padding: EdgeInsets.all(10),
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: items.length,
+        itemCount: widget.items.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
-            child: BookHeader(items[index]),
+            child: BookHeader(widget.items[index], widget.isRootPage ? false : index == clickIndex),
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CategoryPage()),
-              );
+              onClickItem(context, index);
             },
           );
         },
@@ -37,17 +53,33 @@ class BookHeaderComponent extends StatelessWidget {
       ),
     );
   }
+
+  void onClickItem(BuildContext context, int index) {
+    if (widget.isRootPage) {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => CategoryPage(index)));
+    } else {
+      setState(() {
+        clickIndex = index;
+      });
+      if (widget.clickEvent != null) {
+        widget.clickEvent(index);
+      }
+    }
+  }
 }
+
 
 class BookHeader extends StatelessWidget {
   Book item;
+  bool isClick = false;
 
-  BookHeader(this.item);
+  BookHeader(this.item, this.isClick);
 
   BoxDecoration getBoxDecoration() {
     return BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.all(Radius.circular(10)),
+      border: Border.all(width: 1, color: isClick ? Color(0xFFffd262) : Colors.white),
       boxShadow: [
         BoxShadow(
           color: Colors.grey.withOpacity(0.5),
