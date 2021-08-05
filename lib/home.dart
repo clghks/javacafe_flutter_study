@@ -31,7 +31,8 @@ class Home extends StatelessWidget {
           children: [
             BookHeaderComponent(true),
             ...items.map((e) => BookMainComponent(e)).toList(),
-            LikeStudyComponent()
+            LikeStudyComponent(),
+            SizedBox(height: 90)
           ],
         ),
       ),

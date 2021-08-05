@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
+  
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,13 +26,18 @@ class BottomNavigationBarComponent extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.network('https://www.crackerbook.club/assets/main/home.svg'),
-                  Text('홈'),
-                  SizedBox(height: 20)
-                ],
+              GestureDetector(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    SvgPicture.network('https://www.crackerbook.club/assets/main/home.svg'),
+                    Text('홈'),
+                    SizedBox(height: 20)
+                  ],
+                ),
+                onTap: () {
+
+                },
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,

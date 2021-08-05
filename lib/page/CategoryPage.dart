@@ -1,4 +1,5 @@
 import 'package:cracker_book/component/BookHeaderComponent.dart';
+import 'package:cracker_book/component/BottomNavigationBarComponent.dart';
 import 'package:cracker_book/component/TitleAppBarComponent.dart';
 import 'package:cracker_book/model/LikeStudyInfo.dart';
 import 'package:flutter/material.dart';
@@ -46,11 +47,13 @@ class _CategoryPageState extends State<CategoryPage> {
                   CategoryItem(1, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
                   CategoryItem(2, LikeStudyInfo('https://www.crackerbook.club/assets/main/greenBook.jpg', '한달 한권 ${widget.pageIndex}', '3/6', '04.26~05.26 토 14:00')),
                 ],
-              )
+              ),
+              SizedBox(height: 90)
             ],
           ),
         ),
       ),
+      bottomSheet: BottomNavigationBarComponent(),
     );
   }
 
@@ -80,6 +83,7 @@ class CategoryItem extends StatelessWidget {
               Stack(
                 children: [Image.network(item.image), SvgPicture.network('https://www.crackerbook.club/assets/main/like${index + 1}.svg')],
               ),
+              SizedBox(height: 5),
               Row(
                 children: [
                   SvgPicture.network('https://www.crackerbook.club/assets/main/miniBook.svg'),
